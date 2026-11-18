@@ -1,6 +1,9 @@
-streamlit==1.39.0
+streamlit==1.41.1
 tensorflow-cpu==2.15.1
 numpy<2
+pyarrow==17.0.0
 pillow
 paho-mqtt==2.1.0
 gTTS==2.5.3
+SpeechRecognition==3.10.4
+streamlit-drawable-canvas==0.9.3
