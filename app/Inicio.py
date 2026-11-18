@@ -69,8 +69,8 @@ with izq:
     st.markdown("**📚 Rincón de descubrimiento**  \nMuestra un libro y escucha de qué trata.")
     st.page_link("pages/1_📚_Descubrimiento.py", label="Ir a Descubrimiento", icon="➡️")
 with der:
-    st.markdown("**🛋️ Sala de lectura**  \nAjusta la luz con tu voz y deja tu reseña.")
-    st.caption("Próximamente")
+    st.markdown("**💡 Sala de lectura**  \nAjusta la luz con tu voz y deja tu reseña.")
+    st.page_link("pages/2_💡_Sala_de_lectura.py", label="Ir a la Sala de lectura", icon="➡️")
 
 st.divider()
 st.caption(
