@@ -193,7 +193,9 @@ void conectarMQTT() {
   while (!mqtt.connected()) {
     escribirLinea(1, "Conectando MQTT");
     Serial.print("Conectando a MQTT... ");
-    String clientId = "rinconlector-esp32-" + String(random(0xffff), HEX);
+    // ID único en cada conexión (esp_random usa el generador por hardware del ESP32).
+    // Si dos tótems usan el mismo ID, el broker desconecta a uno y se pierden mensajes.
+    String clientId = "rinconlector-esp32-" + String(esp_random(), HEX);
     if (mqtt.connect(clientId.c_str())) {
       Serial.println("conectado!");
       mqtt.subscribe(TOPIC_LIBRO);
@@ -228,7 +230,6 @@ void setup() {
   lcd.init();
   lcd.backlight();
 
-  randomSeed(micros());
   conectarWiFi();
   mqtt.setServer(MQTT_BROKER, MQTT_PORT);
   mqtt.setCallback(alRecibirMensaje);
