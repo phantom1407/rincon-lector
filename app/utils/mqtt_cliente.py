@@ -24,7 +24,8 @@ TOPIC_BOTON = f"{PREFIJO}/boton"      # Tótem -> app: "leer"
 TOPIC_LUZ = f"{PREFIJO}/luz"          # Tótem -> app: luz 0-100
 
 # Si no llega la luz del LDR en este tiempo, el tótem se considera desconectado
-SEGUNDOS_SIN_SENAL = 10
+# (20 s porque Wokwi puede correr lento y enviar la luz con retraso)
+SEGUNDOS_SIN_SENAL = 20
 
 
 class ConexionTotem:
@@ -87,23 +88,31 @@ class ConexionTotem:
         estado = self.leer_estado()
         return (time.time() - estado["ultima_senal"]) < SEGUNDOS_SIN_SENAL
 
-    def publicar(self, topic, mensaje):
-        """Envía un mensaje al tótem. Devuelve True si se pudo enviar."""
+    def publicar(self, topic, mensaje, retener=False):
+        """
+        Envía un mensaje al tótem. Devuelve True si se pudo enviar.
+
+        retener=True guarda el mensaje en el broker: si el tótem se desconecta
+        y vuelve a conectarse (o se reinicia la simulación), recibe de una vez
+        el último libro y el último brillo de la lámpara.
+        """
         if not self.cliente.is_connected():
             return False
-        resultado = self.cliente.publish(topic, str(mensaje))
+        resultado = self.cliente.publish(topic, str(mensaje), qos=1, retain=retener)
         return resultado.rc == mqtt.MQTT_ERR_SUCCESS
 
     def enviar_libro(self, libro):
         return self.publicar(
-            TOPIC_LIBRO, f"{libro['titulo_lcd']}|{libro['genero']}|{libro['idioma']}"
+            TOPIC_LIBRO,
+            f"{libro['titulo_lcd']}|{libro['genero']}|{libro['idioma']}",
+            retener=True,
         )
 
     def limpiar_totem(self):
-        return self.publicar(TOPIC_LIBRO, "ninguno")
+        return self.publicar(TOPIC_LIBRO, "ninguno", retener=True)
 
     def enviar_lampara(self, nivel):
-        return self.publicar(TOPIC_LAMPARA, int(max(0, min(100, nivel))))
+        return self.publicar(TOPIC_LAMPARA, int(max(0, min(100, nivel))), retener=True)
 
     def tocar_melodia(self):
         return self.publicar(TOPIC_FIN, "tocar")
