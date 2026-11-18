@@ -3,19 +3,17 @@ RINCÓN LECTOR · Página 1: Rincón de descubrimiento
 Modalidades: imagen (cámara + modelo), voz de salida (gTTS) y botón físico del tótem.
 """
 
-import base64
 import hashlib
 import io
-import time
 
 import streamlit as st
-from gtts import gTTS
 from PIL import Image
 
 from utils.estilo import aplicar_estilo, chip
-from utils.libros import CLASE_SIN_LIBRO, LIBROS, UMBRAL_CONFIANZA, texto_para_leer
+from utils.libros import LIBROS, UMBRAL_CONFIANZA, texto_para_leer
 from utils.modelo import reconocer
 from utils.mqtt_cliente import obtener_conexion
+from utils.voz import generar_audio, reproducir
 
 st.set_page_config(page_title="Descubrimiento · Rincón Lector", page_icon="📚", layout="centered")
 aplicar_estilo()
@@ -39,24 +37,6 @@ for clave, valor in valores_iniciales.items():
 if st.session_state.pulsaciones_vistas is None:
     # Ignorar pulsaciones que ocurrieron antes de abrir la página
     st.session_state.pulsaciones_vistas = conexion.leer_estado()["pulsaciones"]
-
-
-# ---------- Voz ----------
-@st.cache_data(show_spinner=False)
-def generar_audio(texto: str, idioma: str) -> bytes:
-    buffer = io.BytesIO()
-    gTTS(text=texto, lang=idioma, slow=False).write_to_fp(buffer)
-    return buffer.getvalue()
-
-
-def reproducir(audio: bytes):
-    """Reproduce el audio automáticamente (con un id distinto cada vez para que suene de nuevo)."""
-    b64 = base64.b64encode(audio).decode()
-    marca = int(time.time() * 1000)
-    st.markdown(
-        f'<audio autoplay id="voz-{marca}" src="data:audio/mp3;base64,{b64}"></audio>',
-        unsafe_allow_html=True,
-    )
 
 
 # ---------- Acciones ----------
@@ -147,6 +127,7 @@ with col_resultado:
         etiqueta_boton = "🔊 Léemelo" if libro["idioma"] == "es" else "🔊 Read it to me"
         st.button(etiqueta_boton, on_click=pedir_lectura, type="primary", use_container_width=True)
         st.button("🔄 Otro libro", on_click=otro_libro, use_container_width=True)
+        st.page_link("pages/2_💡_Sala_de_lectura.py", label="Ya lo leí: ir a la Sala de lectura", icon="💡")
 
 # ---------- Resumen y voz ----------
 if st.session_state.libro_clave is not None:
