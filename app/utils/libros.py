@@ -56,6 +56,57 @@ LIBROS = {
     },
 }
 
+# Próxima lectura recomendada según el libro y si le gustó o no.
+# Se escriben en el idioma del libro que se reseñó.
+RECOMENDACIONES = {
+    "lobo_estepario_es": {
+        "positivo": {
+            "titulo": "Siddhartha",
+            "autor": "Hermann Hesse",
+            "anio": 1922,
+            "por_que": "Si te gustó Harry Haller, Siddhartha es otro viaje interior de Hesse, "
+                       "más corto y luminoso, sobre un joven que busca su propio camino.",
+        },
+        "neutral": {
+            "titulo": "El principito",
+            "autor": "Antoine de Saint-Exupéry",
+            "anio": 1943,
+            "por_que": "También habla de la soledad y de lo que de verdad importa, "
+                       "pero es corto, sencillo y se lee en una tarde.",
+        },
+        "negativo": {
+            "titulo": "Crónica de una muerte anunciada",
+            "autor": "Gabriel García Márquez",
+            "anio": 1981,
+            "por_que": "Si te pareció lento, esta es corta y llena de suspenso: "
+                       "desde la primera página sabes qué va a pasar y quieres saber cómo.",
+        },
+    },
+    "ballad_songbirds_en": {
+        "positivo": {
+            "titulo": "Sunrise on the Reaping",
+            "autor": "Suzanne Collins",
+            "anio": 2025,
+            "por_que": "Another prequel set in Panem, this time following a young Haymitch "
+                       "Abernathy in the fiftieth Hunger Games.",
+        },
+        "neutral": {
+            "titulo": "The Hunger Games",
+            "autor": "Suzanne Collins",
+            "anio": 2008,
+            "por_que": "The original story: faster, with more action, and told by Katniss "
+                       "herself. It shows what Snow's choices led to.",
+        },
+        "negativo": {
+            "titulo": "The Giver",
+            "autor": "Lois Lowry",
+            "anio": 1993,
+            "por_que": "A shorter and gentler dystopia about a boy who discovers the secrets "
+                       "of his perfect-looking community.",
+        },
+    },
+}
+
 CLASE_SIN_LIBRO = "sin_libro"
 
 # Confianza mínima para aceptar que el modelo reconoció un libro
@@ -65,3 +116,16 @@ UMBRAL_CONFIANZA = 0.80
 def texto_para_leer(libro):
     """Texto completo que la app lee en voz alta (en el idioma del libro)."""
     return f"{libro['frase_voz']} {libro['resumen']}"
+
+
+def texto_recomendacion(libro, recomendacion):
+    """Frase que la app lee en voz alta al recomendar la próxima lectura."""
+    if libro["idioma"] == "en":
+        return (
+            f"Your next book could be {recomendacion['titulo']}, "
+            f"by {recomendacion['autor']}. {recomendacion['por_que']}"
+        )
+    return (
+        f"Te recomiendo leer {recomendacion['titulo']}, "
+        f"de {recomendacion['autor']}. {recomendacion['por_que']}"
+    )
