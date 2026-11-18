@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "author": "María Alejandra Cisneros",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-lcd1602", "id": "lcd1", "top": -150, "left": 140, "attrs": { "pins": "i2c", "i2cAddress": "0x27" } },
+    { "type": "wokwi-rgb-led", "id": "rgb1", "top": 40, "left": 310, "attrs": { "common": "cathode" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": 140, "left": 260, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r2", "top": 140, "left": 300, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r3", "top": 140, "left": 340, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-pushbutton", "id": "btn1", "top": 250, "left": 220, "attrs": { "color": "red", "label": "Leemelo", "bounce": "0" } },
+    { "type": "wokwi-photoresistor-sensor", "id": "ldr1", "top": 30, "left": -260, "attrs": {} },
+    { "type": "wokwi-led", "id": "led1", "top": 190, "left": -170, "attrs": { "color": "yellow", "label": "Lampara" } },
+    { "type": "wokwi-resistor", "id": "r4", "top": 270, "left": -190, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-buzzer", "id": "bz1", "top": 230, "left": -80, "attrs": { "volume": "0.3" } }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+
+    [ "lcd1:GND", "esp:GND.2", "black", [] ],
+    [ "lcd1:VCC", "esp:5V", "red", [] ],
+    [ "lcd1:SDA", "esp:21", "green", [] ],
+    [ "lcd1:SCL", "esp:22", "blue", [] ],
+
+    [ "esp:25", "r1:1", "red", [] ],
+    [ "r1:2", "rgb1:R", "red", [] ],
+    [ "esp:26", "r2:1", "green", [] ],
+    [ "r2:2", "rgb1:G", "green", [] ],
+    [ "esp:27", "r3:1", "blue", [] ],
+    [ "r3:2", "rgb1:B", "blue", [] ],
+    [ "rgb1:COM", "esp:GND.3", "black", [] ],
+
+    [ "btn1:1.l", "esp:4", "orange", [] ],
+    [ "btn1:2.l", "esp:GND.3", "black", [] ],
+
+    [ "ldr1:VCC", "esp:3V3", "red", [] ],
+    [ "ldr1:GND", "esp:GND.1", "black", [] ],
+    [ "ldr1:AO", "esp:34", "purple", [] ],
+
+    [ "esp:18", "r4:1", "gold", [] ],
+    [ "r4:2", "led1:A", "gold", [] ],
+    [ "led1:C", "esp:GND.1", "black", [] ],
+
+    [ "bz1:2", "esp:19", "orange", [] ],
+    [ "bz1:1", "esp:GND.1", "black", [] ]
+  ],
+  "dependencies": {}
+}

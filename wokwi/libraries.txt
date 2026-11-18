@@ -1,0 +1,3 @@
+# Librerías de Wokwi para el Rincón Lector
+PubSubClient
+LiquidCrystal I2C
