@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="3200" height="1800" font-family="DejaVu Sans, Verdana, Arial, sans-serif">
+  <defs>
+    <marker id="aO" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#E36414"/></marker>
+    <marker id="aT" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0F7C8C"/></marker>
+    <marker id="aG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7B8794"/></marker>
+  </defs>
+  <rect width="1600" height="900" fill="#FFFFFF"/>
+
+  <text x="800" y="48" text-anchor="middle" font-size="30" font-weight="bold" fill="#0F4C5C">Rincón Lector · Arquitectura del sistema</text>
+
+  <!-- ================= PERSONA ================= -->
+  <rect x="30" y="90" width="270" height="700" rx="22" fill="#FDECE0"/>
+  <text x="165" y="128" text-anchor="middle" font-size="21" font-weight="bold" fill="#B34E0E">Persona</text>
+  <text x="165" y="152" text-anchor="middle" font-size="14" fill="#7A4A2A">navegador (PC o celular)</text>
+  <g font-size="15" fill="#1F2933">
+    <text x="55" y="200" font-weight="bold" fill="#B34E0E">Entradas</text>
+    <rect x="50" y="212" width="230" height="44" rx="10" fill="#FFFFFF"/><text x="65" y="240">Cámara · portada</text>
+    <rect x="50" y="264" width="230" height="44" rx="10" fill="#FFFFFF"/><text x="65" y="292">Micrófono · voz</text>
+    <rect x="50" y="316" width="230" height="44" rx="10" fill="#FFFFFF"/><text x="65" y="344">Teclado · texto</text>
+    <rect x="50" y="368" width="230" height="44" rx="10" fill="#FFFFFF"/><text x="65" y="396">Tablero · dibujo</text>
+    <rect x="50" y="420" width="230" height="44" rx="10" fill="#FFFFFF"/><text x="65" y="448">Toque · caritas, botones</text>
+    <text x="55" y="510" font-weight="bold" fill="#B34E0E">Salidas</text>
+    <rect x="50" y="522" width="230" height="44" rx="10" fill="#FFFFFF"/><text x="65" y="550">Pantalla · tarjetas</text>
+    <rect x="50" y="574" width="230" height="44" rx="10" fill="#FFFFFF"/><text x="65" y="602">Altavoz · voz (gTTS)</text>
+  </g>
+  <text x="165" y="680" text-anchor="middle" font-size="14" fill="#7A4A2A">También interactúa con el</text>
+  <text x="165" y="700" text-anchor="middle" font-size="14" fill="#7A4A2A">tótem físico (botón, luz,</text>
+  <text x="165" y="720" text-anchor="middle" font-size="14" fill="#7A4A2A">pantalla y sonido)</text>
+
+  <!-- persona <-> app -->
+  <path d="M302,330 L352,330" stroke="#7B8794" stroke-width="3" fill="none" marker-end="url(#aG)"/>
+  <path d="M352,560 L302,560" stroke="#7B8794" stroke-width="3" fill="none" marker-end="url(#aG)"/>
+
+  <!-- ================= APP ================= -->
+  <rect x="355" y="90" width="520" height="700" rx="22" fill="#EEF5F6" stroke="#0F4C5C" stroke-width="2.5"/>
+  <text x="615" y="128" text-anchor="middle" font-size="21" font-weight="bold" fill="#0F4C5C">App multipágina · Streamlit</text>
+  <text x="615" y="152" text-anchor="middle" font-size="14" fill="#3E5C66">desplegada en Streamlit Cloud (Python 3.11)</text>
+
+  <rect x="380" y="172" width="470" height="56" rx="12" fill="#FFFFFF"/>
+  <text x="400" y="198" font-size="16" font-weight="bold" fill="#0F4C5C">Inicio</text>
+  <text x="400" y="218" font-size="13" fill="#52606D">Cómo funciona · estado del tótem en vivo · acceso a los ambientes</text>
+
+  <rect x="380" y="242" width="470" height="170" rx="12" fill="#FFFFFF"/>
+  <text x="400" y="270" font-size="16" font-weight="bold" fill="#0F4C5C">Página 1 · Rincón de descubrimiento</text>
+  <g font-size="13" fill="#1F2933">
+    <text x="400" y="296">• Cámara → modelo Teachable Machine (Keras, TensorFlow)</text>
+    <text x="414" y="318">reconoce la portada: lobo_estepario_es / ballad_songbirds_en</text>
+    <text x="400" y="340">• Envía título, género e idioma al tótem</text>
+    <text x="400" y="362">• Resumen en voz alta (gTTS, ES o EN)</text>
+    <text x="400" y="384">• Escucha el botón físico «Léemelo»</text>
+  </g>
+
+  <rect x="380" y="426" width="470" height="190" rx="12" fill="#FFFFFF"/>
+  <text x="400" y="454" font-size="16" font-weight="bold" fill="#0F4C5C">Página 2 · Sala de lectura</text>
+  <g font-size="13" fill="#1F2933">
+    <text x="400" y="480">• Medidor de luz en vivo (sensor LDR del tótem)</text>
+    <text x="400" y="502">• Lámpara por voz (SpeechRecognition), deslizador</text>
+    <text x="414" y="524">o modo automático</text>
+    <text x="400" y="546">• Reseña dictada, escrita o dibujada + caritas</text>
+    <text x="400" y="568">• Análisis de sentimiento → recomendación + voz</text>
+    <text x="400" y="590">• Melodía de «libro terminado» en el tótem</text>
+  </g>
+
+  <rect x="380" y="630" width="470" height="140" rx="12" fill="#0F4C5C"/>
+  <text x="400" y="658" font-size="16" font-weight="bold" fill="#F2C14E">utils/ (módulos compartidos)</text>
+  <g font-size="13" fill="#FFFFFF">
+    <text x="400" y="684">mqtt_cliente.py · cliente paho en segundo plano</text>
+    <text x="400" y="706">modelo.py · carga y predicción del modelo</text>
+    <text x="400" y="728">voz.py · gTTS y reconocimiento de voz</text>
+    <text x="400" y="750">lenguaje.py · comandos y sentimiento · libros.py</text>
+  </g>
+
+  <!-- servicios externos -->
+  <rect x="455" y="812" width="320" height="56" rx="12" fill="#F3EAF0"/>
+  <text x="615" y="836" text-anchor="middle" font-size="14" font-weight="bold" fill="#5F0F40">Servicios de Google (internet)</text>
+  <text x="615" y="856" text-anchor="middle" font-size="13" fill="#5F0F40">texto a voz · voz a texto</text>
+  <path d="M615,772 L615,808" stroke="#7B8794" stroke-width="2.5" stroke-dasharray="6 5" fill="none" marker-end="url(#aG)"/>
+
+  <!-- ================= BROKER ================= -->
+  <rect x="935" y="300" width="250" height="300" rx="22" fill="#FFFFFF" stroke="#0F4C5C" stroke-width="2.5"/>
+  <text x="1060" y="340" text-anchor="middle" font-size="20" font-weight="bold" fill="#0F4C5C">Broker MQTT</text>
+  <text x="1060" y="364" text-anchor="middle" font-size="14" fill="#52606D">broker.hivemq.com:1883</text>
+  <text x="1060" y="398" text-anchor="middle" font-size="13" fill="#52606D">prefijo rinconlector_mac/</text>
+  <g font-size="13">
+    <rect x="955" y="414" width="210" height="28" rx="7" fill="#FDECE0"/><text x="967" y="433" fill="#B34E0E">libro  (retenido)</text>
+    <rect x="955" y="448" width="210" height="28" rx="7" fill="#FDECE0"/><text x="967" y="467" fill="#B34E0E">lampara  (retenido)</text>
+    <rect x="955" y="482" width="210" height="28" rx="7" fill="#FDECE0"/><text x="967" y="501" fill="#B34E0E">fin</text>
+    <rect x="955" y="520" width="210" height="28" rx="7" fill="#E3F2F3"/><text x="967" y="539" fill="#0F5C68">boton</text>
+    <rect x="955" y="554" width="210" height="28" rx="7" fill="#E3F2F3"/><text x="967" y="573" fill="#0F5C68">luz  (cada 2 s)</text>
+  </g>
+
+  <!-- flechas app <-> broker -->
+  <path d="M877,330 C905,330 905,380 933,380" stroke="#E36414" stroke-width="4" fill="none" marker-end="url(#aO)"/>
+  <text x="905" y="300" text-anchor="middle" font-size="13" font-weight="bold" fill="#B34E0E">publica</text>
+  <path d="M933,560 C905,560 905,520 877,520" stroke="#0F7C8C" stroke-width="4" fill="none" marker-end="url(#aT)"/>
+  <text x="905" y="608" text-anchor="middle" font-size="13" font-weight="bold" fill="#0F5C68">suscribe</text>
+
+  <!-- flechas broker <-> esp32 -->
+  <path d="M1187,380 C1215,380 1215,330 1243,330" stroke="#E36414" stroke-width="4" fill="none" marker-end="url(#aO)"/>
+  <path d="M1243,560 C1215,560 1215,520 1187,520" stroke="#0F7C8C" stroke-width="4" fill="none" marker-end="url(#aT)"/>
+  <text x="1060" y="270" text-anchor="middle" font-size="14" font-weight="bold" fill="#B34E0E">App → tótem</text>
+  <text x="1060" y="640" text-anchor="middle" font-size="14" font-weight="bold" fill="#0F5C68">Tótem → app</text>
+
+  <!-- ================= ESP32 ================= -->
+  <rect x="1245" y="90" width="325" height="700" rx="22" fill="#0F4C5C"/>
+  <text x="1407" y="128" text-anchor="middle" font-size="21" font-weight="bold" fill="#F2C14E">Tótem · ESP32</text>
+  <text x="1407" y="152" text-anchor="middle" font-size="14" fill="#CDE6EA">simulado en Wokwi · código Arduino</text>
+  <text x="1407" y="174" text-anchor="middle" font-size="14" fill="#CDE6EA">WiFi Wokwi-GUEST + PubSubClient</text>
+
+  <text x="1270" y="218" font-size="15" font-weight="bold" fill="#F2C14E">Actuadores</text>
+  <g font-size="14" fill="#1F2933">
+    <rect x="1265" y="230" width="285" height="58" rx="10" fill="#FFFFFF"/>
+    <text x="1280" y="254" font-weight="bold">LCD 16x2 I2C</text><text x="1280" y="276" font-size="12" fill="#52606D">SDA 21 · SCL 22 · título e idioma</text>
+    <rect x="1265" y="296" width="285" height="58" rx="10" fill="#FFFFFF"/>
+    <text x="1280" y="320" font-weight="bold">LED RGB</text><text x="1280" y="342" font-size="12" fill="#52606D">GPIO 25 · 26 · 27 · color del género</text>
+    <rect x="1265" y="362" width="285" height="58" rx="10" fill="#FFFFFF"/>
+    <text x="1280" y="386" font-weight="bold">Lámpara (LED, PWM)</text><text x="1280" y="408" font-size="12" fill="#52606D">GPIO 18 · brillo 0-100 %</text>
+    <rect x="1265" y="428" width="285" height="58" rx="10" fill="#FFFFFF"/>
+    <text x="1280" y="452" font-weight="bold">Buzzer</text><text x="1280" y="474" font-size="12" fill="#52606D">GPIO 19 · pitido y melodía</text>
+  </g>
+  <text x="1270" y="530" font-size="15" font-weight="bold" fill="#F2C14E">Sensores</text>
+  <g font-size="14" fill="#1F2933">
+    <rect x="1265" y="542" width="285" height="58" rx="10" fill="#FFFFFF"/>
+    <text x="1280" y="566" font-weight="bold">Botón «Léemelo»</text><text x="1280" y="588" font-size="12" fill="#52606D">GPIO 4 · INPUT_PULLUP</text>
+    <rect x="1265" y="608" width="285" height="58" rx="10" fill="#FFFFFF"/>
+    <text x="1280" y="632" font-weight="bold">Sensor de luz (LDR)</text><text x="1280" y="654" font-size="12" fill="#52606D">GPIO 34 · salida analógica AO</text>
+  </g>
+</svg>
